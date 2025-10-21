@@ -7540,10 +7540,31 @@ a.anchor-link {
 <div class="jp-InputArea jp-Cell-inputArea"><div class="jp-InputPrompt jp-InputArea-prompt">
 </div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput" data-mime-type="text/markdown">
 <font size="4">
-<p>In this project, I scraped data from a list on IMDb that contains 215 short dramas. The specific webpage is available at: <a href="https://www.imdb.com/list/ls548976736/">https://www.imdb.com/list/ls548976736/</a>. This list includes many popular short dramas from recent years and provides essential information that helps us understand the content features, story types, production companies, and participants involved in the short drama industry as a form of cultural production.</p>
+<p>In this project, I scraped data from a list on IMDb that contains 215 short dramas.  <br/>
+The specific webpage is available at: <a href="https://www.imdb.com/list/ls548976736/">https://www.imdb.com/list/ls548976736/</a>.  <br/>
+This list includes many popular short dramas from recent years and provides essential information <br/>
+that helps us understand the content features, story types, production companies,  <br/>
+and participants involved in the short drama industry as a form of cultural production.</p>
 <p>My data collection process consisted of two stages.</p>
-<p>The first stage involved extracting the information displayed on the cards of the 215 short dramas listed on the webpage, including title, year, rating score, review count, and starring actors.</p>
-<p>The second stage involved using Python to navigate and interact with the website. In this step, I programmed Python to visit each short drama’s individual page and collect additional information such as storyline, genre, release date, country of origin, platform, and production company.</p>
+<p>The first stage involved extracting the information displayed on the cards  <br/>
+of the 215 short dramas listed on the webpage, including：</p>
+<ul>
+<li>title</li>
+<li>year</li>
+<li>rating score</li>
+<li>review count</li>
+<li>starring actors</li>
+</ul>
+<p>The second stage involved using Python to navigate and interact with the website.  <br/>
+In this step, I programmed Python to visit each short drama’s individual page and collect additional information:</p>
+<ul>
+<li>storyline</li>
+<li>genre</li>
+<li>release date</li>
+<li>country of origin</li>
+<li>platform or official site the drama was published</li>
+<li>production company</li>
+</ul>
 </font></div>
 </div>
 </div>
@@ -7563,7 +7584,7 @@ a.anchor-link {
 <div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
 </div>
 <div class="jp-InputArea jp-Cell-inputArea">
-<div class="jp-InputPrompt jp-InputArea-prompt">In [87]:</div>
+<div class="jp-InputPrompt jp-InputArea-prompt">In [2]:</div>
 <div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
 <div class="cm-editor cm-s-jupyter">
 <div class="highlight hl-ipython3"><pre><span></span><span class="c1"># This command executes the python scripts</span>
@@ -7661,7 +7682,9 @@ a.anchor-link {
 <div class="jp-InputArea jp-Cell-inputArea"><div class="jp-InputPrompt jp-InputArea-prompt">
 </div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput" data-mime-type="text/markdown">
 <font size="4">
-<p>This section of the code extracts summary-level information about each short drama listed on the IMDb webpage. Specifically, it uses Selenium to identify and parse each content card on the list page, collecting the title, release year, rating score, number of user reviews, and starring actors.</p>
+<p>This section of the code extracts summary-level information about each short drama listed on the IMDb webpage.  <br/>
+Specifically, it uses Selenium to identify and parse each content card on the list page,  <br/>
+collecting the title, release year, rating score, number of user reviews, and starring actors.</p>
 </font></div>
 </div>
 </div>
@@ -7802,12 +7825,21 @@ a.anchor-link {
 <div class="jp-InputArea jp-Cell-inputArea"><div class="jp-InputPrompt jp-InputArea-prompt">
 </div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput" data-mime-type="text/markdown">
 <font size="4">
-<p>This section of the code is designed to collect the titles and corresponding detail-page URLs for all short dramas listed on the IMDb collection page before deeper scraping. In other words, this is the “navigation setup” stage of the data collection pipeline. The IMDb list page only shows summary cards (each card containing the title, year, rating, etc.), but more detailed information—like storyline, genre, release date, and production companies—exists on each drama’s individual detail page. Therefore, before scraping those details, we first need to create a reliable mapping between each drama’s title and its unique page link.</p>
+<p>This section of the code is designed to collect the titles and corresponding detail-page URLs  <br/>
+for all short dramas listed on the IMDb collection page before deeper scraping. In other words,  <br/>
+this is the “navigation setup” stage of the data collection pipeline.</p>
+<p>The IMDb list page only shows  <br/>
+summary cards (each card containing the title, year, rating, etc.), but more detailed information—like  <br/>
+storyline, genre, release date, and production companies—exists on each drama’s individual detail page.  <br/>
+Therefore, before scraping those details, we first need to create a reliable mapping between each  <br/>
+drama’s title and its unique page link.</p>
 <p>By extracting all pairs of (title, detail_url):</p>
 <ul>
-<li><p>I ensure that each title can be directly visited later, even if the list page layout changes or pagination occurs.</p>
+<li><p>I ensure that each title can be directly visited later,  <br/>
+even if the list page layout changes or pagination occurs.</p>
 </li>
-<li><p>I also avoid repeated navigation or redundant lookups, which significantly improves efficiency and minimizes the risk of being blocked by the server.</p>
+<li><p>I also avoid repeated navigation or redundant lookups,  <br/>
+which significantly improves efficiency and minimizes the risk of being blocked by the server.</p>
 </li>
 </ul>
 </font></div>
@@ -7851,11 +7883,14 @@ a.anchor-link {
 <div class="jp-InputArea jp-Cell-inputArea"><div class="jp-InputPrompt jp-InputArea-prompt">
 </div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput" data-mime-type="text/markdown">
 <font size="4">
-<p>Then, I visited each individual short drama’s IMDb detail page to collect additional, fine-grained information that was not available on the list view. Specifically, I extracted six major fields:</p>
+<p>Then, I visited each individual short drama’s IMDb detail page to collect additional,  <br/>
+fine-grained information that was not available on the list view. Specifically, I extracted six major fields:</p>
 <ul>
 <li>storyline, genres, release date, country of origin, platform/official site, and production company.</li>
 </ul>
-<p>The codes navigate to each drama’s page one by one, waits for it to fully render, lightly scrolls to trigger lazy-loaded sections, and then parses the underlying HTML using a hybrid method that combines Selenium (for dynamic elements) and BeautifulSoup (for static HTML extraction).</p>
+<p>The codes navigate to each drama’s page one by one, waits for it to fully render, lightly scrolls to  <br/>
+trigger lazy-loaded sections, and then parses the underlying HTML  <br/>
+using a hybrid method that combines Selenium (for dynamic elements) and BeautifulSoup (for static HTML extraction).</p>
 </font></div>
 </div>
 </div>
@@ -7893,7 +7928,8 @@ a.anchor-link {
 <li>Finally, fall back to the simple "plot" span near the top of the page.</li>
 </ul>
 <p>(2) Genre Extraction Failing</p>
-<p>Genres were even trickier because IMDb changes their placement across templates. Early attempts using Selenium returned only None values. The key insight was that:</p>
+<p>Genres were even trickier because IMDb changes their placement across templates. Early attempts  <br/>
+using Selenium returned only None values. The key insight was that:</p>
 <ul>
 <li>Sometimes genres appear as a list under the Storyline section (data-testid="storyline-genres").</li>
 <li>Other times, they appear as clickable chips near the page header (data-testid="genres").</li>
@@ -7904,8 +7940,13 @@ a.anchor-link {
 2.	If missing, read from the header “genre chips.”
 3.	If still missing, parse the embedded JSON-LD for the "genre" field.</p>
 <p>But these methods didn't work.</p>
-<p>I continued to discuss this with ChatGPT, and it said it might be associated with the “Asynchronous rendering issue”，which means that the webpage loads its content dynamically using JavaScript, so when a scraper (like Selenium) tries to extract elements too early, the target data may not yet exist in the DOM.</p>
-<p>In the end, the key improvement came from switching from Selenium’s element-based extraction to a hybrid approach that uses BeautifulSoup to parse the full HTML source. By analyzing driver.page_source directly, I bypassed IMDb’s asynchronous rendering issue, allowing me to consistently retrieve the storyline and genre information that Selenium alone often missed. This not only solved the missing-value problem but also made the scraper much faster and more stable.</p>
+<p>I continued to discuss this with ChatGPT, and it said it might be associated with the “Asynchronous rendering issue”， <br/>
+which means that the webpage loads its content dynamically using JavaScript, so when a scraper (like Selenium)  <br/>
+tries to extract elements too early, the target data may not yet exist in the DOM.</p>
+<p>In the end, the key improvement came from switching from Selenium’s element-based extraction to a hybrid approach  <br/>
+that uses BeautifulSoup to parse the full HTML source. By analyzing driver.page_source directly,  <br/>
+I bypassed IMDb’s asynchronous rendering issue, allowing me to consistently retrieve the storyline  <br/>
+and genre information that Selenium alone often missed. This not only solved the missing-value problem but also made the scraper much faster and more stable.</p>
 </font></div>
 </div>
 </div>
@@ -8130,7 +8171,63 @@ a.anchor-link {
 </div>
 </div>
 </div>
-</div><div class="jp-Cell jp-CodeCell jp-Notebook-cell jp-mod-noOutputs" id="cell-id=ae65189b">
+</div>
+<div class="jp-Cell jp-MarkdownCell jp-Notebook-cell" id="cell-id=59c5f0f1">
+<div class="jp-Cell-inputWrapper" tabindex="0">
+<div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
+</div>
+<div class="jp-InputArea jp-Cell-inputArea"><div class="jp-InputPrompt jp-InputArea-prompt">
+</div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput" data-mime-type="text/markdown">
+<h1 id="-Export-Data-and-Data-Quality-Check-"><span style="color:darkblue"> Export Data and Data Quality Check </span><a class="anchor-link" href="#-Export-Data-and-Data-Quality-Check-">¶</a></h1>
+</div>
+</div>
+</div>
+</div><div class="jp-Cell jp-CodeCell jp-Notebook-cell jp-mod-noOutputs" id="cell-id=8f99bf51">
+<div class="jp-Cell-inputWrapper" tabindex="0">
+<div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
+</div>
+<div class="jp-InputArea jp-Cell-inputArea">
+<div class="jp-InputPrompt jp-InputArea-prompt">In [3]:</div>
+<div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
+<div class="cm-editor cm-s-jupyter">
+<div class="highlight hl-ipython3"><pre><span></span><span class="n">first</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">read_csv</span><span class="p">(</span><span class="s2">"imdb_results1.csv"</span><span class="p">)</span>
+<span class="n">second</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">read_csv</span><span class="p">(</span><span class="s2">"imdb_results2.csv"</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+</div>
+</div>
+<div class="jp-Cell jp-MarkdownCell jp-Notebook-cell" id="cell-id=159a279f">
+<div class="jp-Cell-inputWrapper" tabindex="0">
+<div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
+</div>
+<div class="jp-InputArea jp-Cell-inputArea"><div class="jp-InputPrompt jp-InputArea-prompt">
+</div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput" data-mime-type="text/markdown">
+<font size="4">
+<p>In the process of checking the data, I found that there were some duplicate entries.  <br/>
+In fact, there should be only 186 dramas, but due to these duplicates, the total count reached 215.  <br/>
+I went back to the original webpage and discovered that the duplicates were already present there. <br/>
+Therefore, I removed the duplicate entries and kept only one record for each.</p>
+</font></div>
+</div>
+</div>
+</div><div class="jp-Cell jp-CodeCell jp-Notebook-cell jp-mod-noOutputs" id="cell-id=56d279be">
+<div class="jp-Cell-inputWrapper" tabindex="0">
+<div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
+</div>
+<div class="jp-InputArea jp-Cell-inputArea">
+<div class="jp-InputPrompt jp-InputArea-prompt">In [5]:</div>
+<div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
+<div class="cm-editor cm-s-jupyter">
+<div class="highlight hl-ipython3"><pre><span></span><span class="n">first</span> <span class="o">=</span> <span class="n">first</span><span class="o">.</span><span class="n">drop_duplicates</span><span class="p">(</span><span class="n">subset</span><span class="o">=</span><span class="s2">"title"</span><span class="p">,</span> <span class="n">keep</span><span class="o">=</span><span class="s2">"first"</span><span class="p">)</span>
+<span class="n">second</span> <span class="o">=</span> <span class="n">second</span><span class="o">.</span><span class="n">drop_duplicates</span><span class="p">(</span><span class="n">subset</span><span class="o">=</span><span class="s2">"title"</span><span class="p">,</span> <span class="n">keep</span><span class="o">=</span><span class="s2">"first"</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+</div>
+</div><div class="jp-Cell jp-CodeCell jp-Notebook-cell jp-mod-noOutputs" id="cell-id=b686225e">
 <div class="jp-Cell-inputWrapper" tabindex="0">
 <div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
 </div>
@@ -8138,10 +8235,267 @@ a.anchor-link {
 <div class="jp-InputPrompt jp-InputArea-prompt">In [ ]:</div>
 <div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
 <div class="cm-editor cm-s-jupyter">
-<div class="highlight hl-ipython3"><pre><span></span><span class="c1"># Merge the two DataFrames on "title" and save the combined results</span>
-<span class="n">merged_df</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">merge</span><span class="p">(</span><span class="n">df</span><span class="p">,</span> <span class="n">detail</span><span class="p">,</span> <span class="n">on</span><span class="o">=</span><span class="s2">"title"</span><span class="p">,</span> <span class="n">how</span><span class="o">=</span><span class="s2">"left"</span><span class="p">)</span>
-<span class="n">merged_df</span><span class="o">.</span><span class="n">to_csv</span><span class="p">(</span><span class="s2">"imdb_merged_results.csv"</span><span class="p">,</span> <span class="n">index</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span> <span class="n">encoding</span><span class="o">=</span><span class="s2">"utf-8"</span><span class="p">)</span>
+<div class="highlight hl-ipython3"><pre><span></span><span class="n">merged_df</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">merge</span><span class="p">(</span><span class="n">first</span><span class="p">,</span> <span class="n">second</span><span class="p">,</span> <span class="n">on</span><span class="o">=</span><span class="s2">"title"</span><span class="p">,</span> <span class="n">how</span><span class="o">=</span><span class="s2">"left"</span><span class="p">)</span>
 </pre></div>
+</div>
+</div>
+</div>
+</div>
+</div><div class="jp-Cell jp-CodeCell jp-Notebook-cell jp-mod-noOutputs" id="cell-id=cd10a317">
+<div class="jp-Cell-inputWrapper" tabindex="0">
+<div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
+</div>
+<div class="jp-InputArea jp-Cell-inputArea">
+<div class="jp-InputPrompt jp-InputArea-prompt">In [7]:</div>
+<div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
+<div class="cm-editor cm-s-jupyter">
+<div class="highlight hl-ipython3"><pre><span></span><span class="n">merged_df</span><span class="o">.</span><span class="n">to_csv</span><span class="p">(</span><span class="s2">"imdb_merged_results.csv"</span><span class="p">,</span> <span class="n">index</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span> <span class="n">encoding</span><span class="o">=</span><span class="s2">"utf-8"</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+</div>
+</div>
+<div class="jp-Cell jp-MarkdownCell jp-Notebook-cell" id="cell-id=55db3f15">
+<div class="jp-Cell-inputWrapper" tabindex="0">
+<div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
+</div>
+<div class="jp-InputArea jp-Cell-inputArea"><div class="jp-InputPrompt jp-InputArea-prompt">
+</div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput" data-mime-type="text/markdown">
+<font size="5">
+<p>Quality Check</p>
+</font></div>
+</div>
+</div>
+</div>
+<div class="jp-Cell jp-MarkdownCell jp-Notebook-cell" id="cell-id=64b3d469">
+<div class="jp-Cell-inputWrapper" tabindex="0">
+<div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
+</div>
+<div class="jp-InputArea jp-Cell-inputArea"><div class="jp-InputPrompt jp-InputArea-prompt">
+</div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput" data-mime-type="text/markdown">
+<font size="5">
+Quality Check
+
+
+</font></div>
+</div>
+</div>
+</div>
+<div class="jp-Cell jp-MarkdownCell jp-Notebook-cell" id="cell-id=3bed1ef7">
+<div class="jp-Cell-inputWrapper" tabindex="0">
+<div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
+</div>
+<div class="jp-InputArea jp-Cell-inputArea"><div class="jp-InputPrompt jp-InputArea-prompt">
+</div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput" data-mime-type="text/markdown">
+<font size="4">
+<p>Number of variables: 16</p>
+<p>Number of observations: 186</p>
+<p>Overall, the dataset is relatively complete, but there are a few columns with high levels of missing data <br/>
+— especially for secondary or tertiary categorical variables.</p>
+<p>The high proportion of missing values in variables such as genre2, genre3, platform2, and platform3 <br/>
+does not indicate errors or data loss but rather reflects the structural design of the dataset. <br/>
+Most short dramas on IMDb are tagged with only one or two genres, and only a few titles have three. <br/>
+To capture these cases, I created additional columns (genre2 and genre3) to store the second and third genre labels<br/>
+when available. Similarly, while some dramas are distributed across multiple platforms, the majority appear on only one.<br/>
+The variables platform2 and platform3 were included to record additional platforms when applicable.<br/>
+Therefore, the large number of missing values in these columns represents expected structural sparsity <br/>
+rather than missing information, and it does not affect the overall completeness or reliability of the dataset.</p>
+</font></div>
+</div>
+</div>
+</div><div class="jp-Cell jp-CodeCell jp-Notebook-cell" id="cell-id=2bbf78f1">
+<div class="jp-Cell-inputWrapper" tabindex="0">
+<div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
+</div>
+<div class="jp-InputArea jp-Cell-inputArea">
+<div class="jp-InputPrompt jp-InputArea-prompt">In [ ]:</div>
+<div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
+<div class="cm-editor cm-s-jupyter">
+<div class="highlight hl-ipython3"><pre><span></span><span class="c1"># Create a summary DataFrame to inspect data quality</span>
+<span class="n">summary</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">({</span>
+    <span class="c1"># Count the number of missing (NaN) values in each column</span>
+    <span class="s1">'missing_count'</span><span class="p">:</span> <span class="n">merged_df</span><span class="o">.</span><span class="n">isnull</span><span class="p">()</span><span class="o">.</span><span class="n">sum</span><span class="p">(),</span>
+    <span class="c1"># Calculate the percentage of missing values in each column</span>
+    <span class="c1"># .mean() gives the fraction of NaN values; multiply by 100 to convert to percentage</span>
+    <span class="s1">'missing_ratio(%)'</span><span class="p">:</span> <span class="n">merged_df</span><span class="o">.</span><span class="n">isnull</span><span class="p">()</span><span class="o">.</span><span class="n">mean</span><span class="p">()</span><span class="o">.</span><span class="n">round</span><span class="p">(</span><span class="mi">3</span><span class="p">)</span><span class="o">*</span><span class="mi">100</span><span class="p">,</span>
+    <span class="c1"># Count the number of unique (distinct) values in each column</span>
+    <span class="s1">'unique_count'</span><span class="p">:</span> <span class="n">merged_df</span><span class="o">.</span><span class="n">nunique</span><span class="p">(),</span>
+    <span class="c1"># Get the data type (e.g., object, int64, float64) of each column</span>
+    <span class="s1">'dtype'</span><span class="p">:</span> <span class="n">merged_df</span><span class="o">.</span><span class="n">dtypes</span>
+<span class="p">})</span><span class="o">.</span><span class="n">reset_index</span><span class="p">()</span><span class="o">.</span><span class="n">rename</span><span class="p">(</span><span class="n">columns</span><span class="o">=</span><span class="p">{</span><span class="s1">'index'</span><span class="p">:</span> <span class="s1">'variable'</span><span class="p">})</span>
+
+<span class="n">summary</span> <span class="o">=</span> <span class="n">summary</span><span class="o">.</span><span class="n">sort_values</span><span class="p">(</span><span class="n">by</span><span class="o">=</span><span class="s1">'missing_ratio(%)'</span><span class="p">,</span> <span class="n">ascending</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
+<span class="n">display</span><span class="p">(</span><span class="n">summary</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+</div>
+<div class="jp-Cell-outputWrapper">
+<div class="jp-Collapser jp-OutputCollapser jp-Cell-outputCollapser">
+</div>
+<div class="jp-OutputArea jp-Cell-outputArea">
+<div class="jp-OutputArea-child">
+<div class="jp-OutputPrompt jp-OutputArea-prompt"></div>
+<div class="jp-RenderedHTMLCommon jp-RenderedHTML jp-OutputArea-output" data-mime-type="text/html" tabindex="0">
+<div>
+<style scoped="">
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+<thead>
+<tr style="text-align: right;">
+<th></th>
+<th>variable</th>
+<th>missing_count</th>
+<th>missing_ratio(%)</th>
+<th>unique_count</th>
+<th>dtype</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<th>14</th>
+<td>platform3</td>
+<td>186</td>
+<td>100.0</td>
+<td>0</td>
+<td>float64</td>
+</tr>
+<tr>
+<th>9</th>
+<td>genre3</td>
+<td>162</td>
+<td>87.1</td>
+<td>5</td>
+<td>object</td>
+</tr>
+<tr>
+<th>13</th>
+<td>platform2</td>
+<td>151</td>
+<td>81.2</td>
+<td>12</td>
+<td>object</td>
+</tr>
+<tr>
+<th>8</th>
+<td>genre2</td>
+<td>124</td>
+<td>66.7</td>
+<td>9</td>
+<td>object</td>
+</tr>
+<tr>
+<th>12</th>
+<td>platform1</td>
+<td>32</td>
+<td>17.2</td>
+<td>33</td>
+<td>object</td>
+</tr>
+<tr>
+<th>15</th>
+<td>production_company</td>
+<td>20</td>
+<td>10.8</td>
+<td>70</td>
+<td>object</td>
+</tr>
+<tr>
+<th>11</th>
+<td>country_of_origin</td>
+<td>4</td>
+<td>2.2</td>
+<td>9</td>
+<td>object</td>
+</tr>
+<tr>
+<th>2</th>
+<td>rating</td>
+<td>3</td>
+<td>1.6</td>
+<td>34</td>
+<td>float64</td>
+</tr>
+<tr>
+<th>3</th>
+<td>review_count</td>
+<td>3</td>
+<td>1.6</td>
+<td>128</td>
+<td>object</td>
+</tr>
+<tr>
+<th>10</th>
+<td>release_date</td>
+<td>2</td>
+<td>1.1</td>
+<td>162</td>
+<td>object</td>
+</tr>
+<tr>
+<th>4</th>
+<td>stars</td>
+<td>1</td>
+<td>0.5</td>
+<td>185</td>
+<td>object</td>
+</tr>
+<tr>
+<th>0</th>
+<td>title</td>
+<td>0</td>
+<td>0.0</td>
+<td>186</td>
+<td>object</td>
+</tr>
+<tr>
+<th>1</th>
+<td>year</td>
+<td>0</td>
+<td>0.0</td>
+<td>9</td>
+<td>object</td>
+</tr>
+<tr>
+<th>5</th>
+<td>detail_url</td>
+<td>0</td>
+<td>0.0</td>
+<td>186</td>
+<td>object</td>
+</tr>
+<tr>
+<th>6</th>
+<td>storyline</td>
+<td>0</td>
+<td>0.0</td>
+<td>169</td>
+<td>object</td>
+</tr>
+<tr>
+<th>7</th>
+<td>genre1</td>
+<td>0</td>
+<td>0.0</td>
+<td>12</td>
+<td>object</td>
+</tr>
+</tbody>
+</table>
+</div>
 </div>
 </div>
 </div>
